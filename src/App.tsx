@@ -7,10 +7,14 @@ import { SecurityTools } from './components/SecurityTools';
 import { LearningPath } from './components/LearningPath';
 import { Progress } from './components/Progress';
 import { AIAssistant } from './components/AIAssistant';
+import { ToolPage } from './components/ToolPage';
+import { VoiceGuide } from './components/VoiceGuide';
 
 function App() {
   const [activeTab, setActiveTab] = useState('labs');
   const [selectedLab, setSelectedLab] = useState<string | null>(null);
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [showVoiceGuide, setShowVoiceGuide] = useState(true);
 
   const handleLabSelect = (labType: string) => {
     setSelectedLab(labType);
@@ -18,6 +22,14 @@ function App() {
 
   const handleCloseStore = () => {
     setSelectedLab(null);
+  };
+
+  const handleToolSelect = (toolId: string) => {
+    setSelectedTool(toolId);
+  };
+
+  const handleCloseToolPage = () => {
+    setSelectedTool(null);
   };
 
   return (
@@ -34,7 +46,7 @@ function App() {
           </>
         )}
 
-        {activeTab === 'tools' && <SecurityTools />}
+        {activeTab === 'tools' && <SecurityTools onToolSelect={handleToolSelect} />}
         {activeTab === 'learn' && <LearningPath />}
         {activeTab === 'progress' && <Progress />}
         {activeTab === 'assistant' && <AIAssistant />}
@@ -45,6 +57,17 @@ function App() {
           vulnerabilityType={selectedLab}
           onClose={handleCloseStore}
         />
+      )}
+
+      {selectedTool && (
+        <ToolPage
+          toolId={selectedTool}
+          onClose={handleCloseToolPage}
+        />
+      )}
+
+      {showVoiceGuide && (
+        <VoiceGuide onClose={() => setShowVoiceGuide(false)} />
       )}
     </div>
   );

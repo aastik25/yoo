@@ -71,7 +71,6 @@ export function Progress() {
     { label: 'Total Points', value: '210', icon: Trophy, color: 'text-yellow-600 bg-yellow-100' },
     { label: 'Labs Completed', value: '2/8', icon: Target, color: 'text-blue-600 bg-blue-100' },
     { label: 'Current Streak', value: '2 days', icon: Zap, color: 'text-orange-600 bg-orange-100' },
-    { label: 'Rank', value: '#1,234', icon: TrendingUp, color: 'text-purple-600 bg-purple-100' },
   ];
 
   return (
@@ -81,7 +80,7 @@ export function Progress() {
         <p className="text-gray-600 mt-2">Track your learning journey and achievements</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (

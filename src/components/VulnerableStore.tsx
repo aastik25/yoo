@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ShoppingCart, AlertTriangle, CheckCircle, X } from 'lucide-react';
+import { LabAIAssistant } from './LabAIAssistant';
 
 interface VulnerableStoreProps {
   vulnerabilityType: string;
@@ -156,13 +157,8 @@ export function VulnerableStore({ vulnerabilityType, onClose }: VulnerableStoreP
         )}
 
         <div className="p-6 space-y-6">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start space-x-3">
-            <AlertTriangle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-semibold text-yellow-900">Lab Instructions</h3>
-              <p className="text-yellow-800 text-sm mt-1">{info.hint}</p>
-            </div>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-3 space-y-6">
 
           {vulnerabilityType === 'auth-bypass' && !isLoggedIn && (
             <div className="bg-white border border-gray-200 rounded-lg p-6 max-w-md mx-auto">
@@ -201,6 +197,14 @@ export function VulnerableStore({ vulnerabilityType, onClose }: VulnerableStoreP
               </form>
             </div>
           )}
+
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start space-x-3">
+                <AlertTriangle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-yellow-900">Lab Instructions</h3>
+                  <p className="text-yellow-800 text-sm mt-1">{info.hint}</p>
+                </div>
+              </div>
 
           {(vulnerabilityType !== 'auth-bypass' || isLoggedIn) && (
             <>
@@ -247,6 +251,12 @@ export function VulnerableStore({ vulnerabilityType, onClose }: VulnerableStoreP
               </div>
             </>
           )}
+            </div>
+
+            <div className="lg:col-span-1">
+              <LabAIAssistant vulnerabilityType={vulnerabilityType} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
